@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://mnc11oat666d"]
+
+[ext_resource type="Script" path="res://BulletSystem/bullet_system.gd" id="1_ggu3m"]
+
+[node name="BulletSystem" type="Node"]
+script = ExtResource("1_ggu3m")
+
+[node name="PlayerBullets" type="Node" parent="."]
+
+[node name="EnemyBullets" type="Node" parent="."]

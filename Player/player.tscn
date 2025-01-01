@@ -1,19 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://bp82pbcordmhi"]
+[gd_scene load_steps=7 format=3 uid="uid://bp82pbcordmhi"]
 
-[ext_resource type="Texture2D" uid="uid://g0jx3ma07nd" path="res://icon.svg" id="1_2lbva"]
-[ext_resource type="Script" path="res://Player/player.gd" id="1_xuq1q"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_g55h5"]
+[ext_resource type="Texture2D" uid="uid://bpayir87njosl" path="res://Player/player.png" id="2_2ljwi"]
+[ext_resource type="Texture2D" uid="uid://bsq32avhxdr0b" path="res://Player/hitbox.png" id="3_rj36v"]
+[ext_resource type="Texture2D" uid="uid://sp6vgfwo13xp" path="res://Player/wave.png" id="4_orkqe"]
+[ext_resource type="PackedScene" uid="uid://ce8ci1ujguefi" path="res://Player/Options/player_option.tscn" id="5_2mevg"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_l06e3"]
-radius = 18.0278
+[sub_resource type="CircleShape2D" id="CircleShape2D_43nox"]
+radius = 3.16228
 
 [node name="Player" type="Node2D"]
-script = ExtResource("1_xuq1q")
+script = ExtResource("1_g55h5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_2lbva")
+texture = ExtResource("2_2ljwi")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" type="Sprite2D" parent="Sprite2D"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_rj36v")
+
+[node name="HitboxArea" type="Area2D" parent="."]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_l06e3")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea"]
+shape = SubResource("CircleShape2D_43nox")
+
+[node name="deathWave" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_orkqe")
+
+[node name="Player_option" parent="." instance=ExtResource("5_2mevg")]
+position = Vector2(29, -28)
+
+[node name="Player_option2" parent="." instance=ExtResource("5_2mevg")]
+position = Vector2(-29, -28)
+
+[node name="Player_option3" parent="." instance=ExtResource("5_2mevg")]
+position = Vector2(0, -37)
+
+[connection signal="area_entered" from="HitboxArea" to="." method="_die"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr6r3dww5j2qo"]
+
+[ext_resource type="Script" path="res://Player/Bullets/player_bullet.gd" id="1_javsm"]
+[ext_resource type="Texture2D" uid="uid://cgd6slhmojqjp" path="res://Player/Bullets/bullet.png" id="1_rk50m"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hywe1"]
+radius = 11.0
+height = 44.0
+
+[node name="Player_Bullet" type="Node2D"]
+script = ExtResource("1_javsm")
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CapsuleShape2D_hywe1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rk50m")
