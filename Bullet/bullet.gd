@@ -1,5 +1,5 @@
 extends Node2D
-class_name Bullet
+class_name Bullet2
 
 @export var Angle: float
 @export var Speed: float

@@ -1,17 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://b57cq0qk5oqi7"]
+[gd_scene load_steps=5 format=3 uid="uid://b57cq0qk5oqi7"]
 
 [ext_resource type="PackedScene" uid="uid://bp82pbcordmhi" path="res://Player/player.tscn" id="1_2v2kn"]
-[ext_resource type="PackedScene" uid="uid://15r4swrxavnb" path="res://Bullet/bullet.tscn" id="2_1p1ui"]
+[ext_resource type="PackedScene" uid="uid://br285epkahpke" path="res://Experiments/experimental_bullet_system.tscn" id="2_0640m"]
+[ext_resource type="Texture2D" uid="uid://6x7lahp6idpf" path="res://Bullet/bullet.png" id="3_ko8oh"]
+[ext_resource type="Script" path="res://bigBadBullet.gd" id="4_8fus3"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_2v2kn")]
-position = Vector2(42, 233)
+position = Vector2(0, -39)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Bullet2" parent="." instance=ExtResource("2_1p1ui")]
-position = Vector2(-20, -20)
+[node name="ExperimentalBulletSystem" parent="." instance=ExtResource("2_0640m")]
+bullet_image = ExtResource("3_ko8oh")
 
-[node name="Bullet3" parent="." instance=ExtResource("2_1p1ui")]
-position = Vector2(20, 20)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-519, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("3_ko8oh")
+script = ExtResource("4_8fus3")

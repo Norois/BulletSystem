@@ -68,7 +68,6 @@ func _die(area: Area2D):
 	if(isBeingHit):
 		return
 	isBeingHit = true
-	area.get_parent().queue_free()
 	$HitboxArea.set_deferred("monitoring", false)
 	for n in 30:
 		canMove = false
