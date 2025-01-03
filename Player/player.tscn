@@ -38,4 +38,4 @@ position = Vector2(-29, -28)
 [node name="Player_option3" parent="." instance=ExtResource("5_2mevg")]
 position = Vector2(0, -37)
 
-[connection signal="area_entered" from="HitboxArea" to="." method="_die"]
+[connection signal="area_shape_entered" from="HitboxArea" to="." method="_die"]

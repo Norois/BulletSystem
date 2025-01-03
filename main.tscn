@@ -8,7 +8,7 @@
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_2v2kn")]
-position = Vector2(0, -39)
+position = Vector2(-463, -60)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -16,7 +16,7 @@ position = Vector2(0, -39)
 bullet_image = ExtResource("3_ko8oh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-519, 0)
+position = Vector2(1, 3)
 scale = Vector2(3, 3)
 texture = ExtResource("3_ko8oh")
 script = ExtResource("4_8fus3")

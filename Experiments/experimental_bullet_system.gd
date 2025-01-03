@@ -4,9 +4,12 @@ class_name ExperimentalBulletSystem
 var bullets: Array = []
 @onready var shared_area: Node = $Area2D as Area2D
 
-var bullets_stay_here: Rect2 = Rect2(0, 0, 300, 300)
+var bullets_stay_here: Rect2 = Rect2(-300, -300, 600, 600)
 
 @export var bullet_image: Texture2D
+
+func _ready() -> void:
+	Global.BulletSystemEx = self
 
 func _exit_tree() -> void:
 	for bullet in bullets:
@@ -30,9 +33,9 @@ func _process(delta: float) -> void:
 		
 		var bullet = bullets[i] as Bullet
 		
-		#if(!bullets_stay_here.has_point(bullet.current_position)):
-			#bullets_destruct.append(bullet)
-			#continue
+		if(!bullets_stay_here.has_point(bullet.current_position)):
+			bullets_destruct.append(bullet)
+			continue
 		
 		var offset: Vector2 = (
 			bullet.movement_vector.normalized() * bullet.speed * delta
@@ -45,6 +48,8 @@ func _process(delta: float) -> void:
 		)
 	
 	for bullet in bullets_destruct:
+		print(bullet.shape_id)
+		print(bullets.find(bullet))
 		PhysicsServer2D.free_rid(bullet.shape_id)
 		bullets.erase(bullet)
 	
@@ -74,3 +79,6 @@ func bullet_collision(bullet: Bullet):
 	
 	bullet.shape_id = shape
 	
+
+func remove_this(bullet_rid: RID):
+	pass
