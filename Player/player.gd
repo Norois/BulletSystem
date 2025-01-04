@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D/Hitbox.visible = false;
 	
 
-func _die(area_rid: RID, area: Area2D):
+func _die(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int):
 	Global.BulletSystemEx.remove_this(area_rid)
 	hit.emit()
 	if(isBeingHit):

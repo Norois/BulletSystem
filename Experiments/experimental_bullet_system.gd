@@ -4,9 +4,12 @@ class_name ExperimentalBulletSystem
 var bullets: Array = []
 @onready var shared_area: Node = $Area2D as Area2D
 
-var bullets_stay_here: Rect2 = Rect2(-300, -300, 600, 600)
+var bullets_stay_here: Rect2 = Rect2(-500, -500, 1000, 1000)
 
 @export var bullet_image: Texture2D
+
+var bulletDict: Dictionary
+var bullets_destruct = []
 
 func _ready() -> void:
 	Global.BulletSystemEx = self
@@ -27,7 +30,6 @@ func _draw() -> void:
 
 func _process(delta: float) -> void:
 	var used_transform = Transform2D()
-	var bullets_destruct = []
 	
 	for i in range(0, bullets.size()):
 		
@@ -47,14 +49,14 @@ func _process(delta: float) -> void:
 			shared_area.get_rid(), i, used_transform
 		)
 	
-	for bullet in bullets_destruct:
-		print(bullet.shape_id)
-		print(bullets.find(bullet))
-		PhysicsServer2D.free_rid(bullet.shape_id)
-		bullets.erase(bullet)
+	#for bullet in bullets_destruct:
+		#print(bullet.shape_id)
+		#print(bullets.find(bullet))
+		#PhysicsServer2D.free_rid(bullet.shape_id)
+		#bullets.erase(bullet)
+		#bulletDict.erase(bullet.shape_id)
 	
 	queue_redraw()
-
 
 func spawn_bullet(spawnPos: Vector2, moveVec: Vector2, speed: float):
 	var bullet: Bullet = Bullet.new()
@@ -65,6 +67,11 @@ func spawn_bullet(spawnPos: Vector2, moveVec: Vector2, speed: float):
 	bullet_collision(bullet)
 	
 	bullets.append(bullet)
+	
+	var addThis: Dictionary = {
+		bullet.shape_id : bullet
+	}
+	bulletDict.merge(addThis, true)
 
 func bullet_collision(bullet: Bullet):
 	
@@ -78,7 +85,13 @@ func bullet_collision(bullet: Bullet):
 	)
 	
 	bullet.shape_id = shape
-	
 
 func remove_this(bullet_rid: RID):
-	pass
+	var bullet = bulletDict.get(bullet_rid)
+	print(bullets.find(bulletDict.get(bullet_rid)))
+	
+	bullets_destruct.append(bullet)
+	
+	print(bullet_rid)
+	print(bullets.find(bullet))
+	

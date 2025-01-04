@@ -1,6 +1,6 @@
 extends Sprite2D
 
-@onready var bullet_system: Node2D = get_parent().get_node("ExperimentalBulletSystem") as ExperimentalBulletSystem
+@onready var bullet_system: Node2D = Global.BulletSystemEx
 
 func _ready() -> void:
 	shoot()
