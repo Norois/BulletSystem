@@ -1,6 +1,5 @@
 extends Node2D
 
-signal hit
 @export var lives = 2
 @export var bombs = 3
 @export var speed = 300
@@ -63,11 +62,12 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D/Hitbox.visible = false;
 	
 
-func _die(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int):
-	Global.BulletSystemEx.remove_this(area_rid)
-	hit.emit()
+func _die(area_rid: RID, _area: Area2D, area_shape_index: int, _local_shape_index: int):
 	if(isBeingHit):
 		return
+	# Remove the bullet that hit you, passes the RID of the bullet shape that is then read in the system
+	Global.BulletSystemEx.remove_this(PhysicsServer2D.area_get_shape(area_rid, area_shape_index))
+	
 	isBeingHit = true
 	$HitboxArea.set_deferred("monitoring", false)
 	for n in 30:
